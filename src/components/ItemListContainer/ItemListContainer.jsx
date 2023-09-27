@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom'
 import './styles.css'
 
 const ItemListContainer = (props) => {
 return(
 <div className='container'>
 <button>
-    Inicio
+    <Link to={'/'}>Inicio</Link>
 </button>
 <button>
     Nosotors
