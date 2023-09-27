@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar/Navbar"
 import { useEffect, useState } from "react"
 import { producto } from "../../Items/Products"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 
 const ItemDetail = () => {
@@ -32,6 +32,7 @@ steIsloading(false)
                     <h1>{product.nombre}</h1>
                     <p>{product.precio}</p>
                     <p>{product.descripcion}</p>
+                    <button><Link to={'/checkout'}>Ir al chack out</Link></button>
                 
                 </div>
             }
