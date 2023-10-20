@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import {InicioPage, ItemDetailPage, CheckoutPage} from '../pages'
+import {InicioPage, ItemDetailContainerPage, CheckoutPage,CartPage} from '../pages'
 
 const Navigation = () => {
 const routes = createBrowserRouter([
@@ -8,12 +8,16 @@ const routes = createBrowserRouter([
         element: <InicioPage/>
     },
     {
-        path: '/product/:idProduct',
-        element: <ItemDetailPage/>
+        path: '/product/:id',
+        element: <ItemDetailContainerPage/>
     },
     {
         path: '/checkout',
         element: <CheckoutPage/>
+    },
+    {
+        path: '/cart',
+        element: <CartPage/>
     },
 
 

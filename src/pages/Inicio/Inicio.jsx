@@ -1,38 +1,55 @@
-import { useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import ItemList from '../../components/Itemlist/ItemList'
 import Item from '../../components/Item/Item'
-import { producto } from '../../Items/Products'
 import Navbar from "../../components/Navbar/Navbar"
-
+import { getFirestore, getDocs, collection, query, where } from 'firebase/firestore'
 const Inicio = () => {
 
     const [isLoading, setIsloading] = useState(true);
-    const [products, setProducts] = useState ([]);
-   
-    const getData = async () => {
-    return await new Promise ((resolve) => {
-     setTimeout(() =>{
-       resolve(producto)
-     }, 2000)
-    })
-    }
-   
-    useEffect (() => {
-     getData().then((res) => {
-       setProducts(res);
-       setIsloading(false);
-     })
-    })
-   
+    const [listProducts,setListProducts] = useState([]);
+    const {id}=useParams();
+  
+    useEffect(()=> {
+
+      const db = getFirestore();
+      if(!id){
+        const refCollection=collection(db,"productos");
+        getDocs(refCollection).then(snapshot=>{
+          if(snapshot.size===0) console.log("sin resultados")
+          else
+          setListProducts(snapshot.docs.map(doc=>{
+            return { id:doc.id, ...doc.data() }
+          })
+          )
+           
+        }).finally(()=>setIsloading(false))
+      }else{
+        const q= query(
+          collection(db,"productos"),
+          where("categoria","==",id)
+        );
+        getDocs(q).then(snapshot=>{
+          if(snapshot.size===0) console.log("sin resultados")
+          else
+          setListProducts(snapshot.docs.map(doc=>{
+            return { id:doc.id,...doc.data() }
+          })
+          )
+         
+        }).finally(()=>setIsloading(false))
+      }
+},[id])
+    
     return (
 
     <div>
        <header> <Navbar></Navbar></header>
-       <ItemList>
+       <ItemList children={Item}>
           {
             isLoading 
             ?<div>Cargando</div>
-            :products.map((producto) => (<Item id = {producto.id} nombre = {producto.nombre} descripcion = {producto.descripcion} precio = {producto.precio}></Item>))
+            :listProducts.map((producto) => (<Item items={producto} ></Item>))
           }
         </ItemList>
 

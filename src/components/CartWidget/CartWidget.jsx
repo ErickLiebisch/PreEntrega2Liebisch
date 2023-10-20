@@ -1,12 +1,20 @@
+import { useContext } from 'react'
 import './styles.css'
+import { Link } from 'react-router-dom'
 import {MdShoppingBasket} from 'react-icons/Md'
+import { CartCtx } from '../../context/CartContext'
 const CartWidget = () => {
-return (
+    const {totalWidget} = useContext(CartCtx)
+
+
+
+    return (
 
     
 <div>
+    <Link to ="/checkout"></Link>
     <div className='circulo'>
-        1
+    {totalWidget}
     </div>
     <MdShoppingBasket>
 

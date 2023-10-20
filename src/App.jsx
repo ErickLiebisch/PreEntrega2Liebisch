@@ -5,12 +5,14 @@ import './App.css'
 import Navbar from "./components/Navbar/Navbar.jsx"
 import ItemList from './components/Itemlist/ItemList'
 import Item from './components/Item/Item'
-import { producto } from './Items/Products'
 import Navigation from './routes/Navigation'
+import CartContext from './context/CartContext'
 
 function App() {
 return (
+  <CartContext>
   <Navigation/>
+  </CartContext>
       
     
   )

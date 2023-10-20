@@ -1,8 +1,13 @@
 import ItemListContainer from '../ItemListContainer/ItemListContainer' 
 import './styles.css'
 import CartWidget from '../CartWidget/CartWidget'
+import { useContext } from 'react'
+import { CartCtx } from '../../context/CartContext'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
+
+
 return (
 <div className='navbar'>
 <ItemListContainer>
@@ -12,9 +17,11 @@ return (
 <div>
     
 </div>
-<CartWidget>
+<Link to={'/cart'}>
+<CartWidget/>
+</Link>
     
-</CartWidget>
+
 </div>
 
 

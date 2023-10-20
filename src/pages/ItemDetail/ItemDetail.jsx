@@ -1,47 +1,49 @@
 import Navbar from "../../components/Navbar/Navbar"
-import { useEffect, useState } from "react"
-import { producto } from "../../Items/Products"
-import { useParams, Link } from "react-router-dom"
+
+import { Link } from "react-router-dom"
+import { useContext } from "react"
+
+import { CartCtx } from "../../context/CartContext"
+import { ItemCount } from "../../components/ItemCount/ItemCount"
+import ItemD from "../../components/Item/itemD"
+import ItemDList from "../../components/Itemlist/ItemDList"
 
 
-const ItemDetail = () => {
-   const {idProduct} = useParams()
-   const [product, setProduct] = useState ([])
-   const [isLoading, steIsloading] = useState(true)
-   const searchProduct = producto.find((prod) => prod.id === parseInt(idProduct))
-   useEffect(( )=> {
-setTimeout (() =>{
+const ItemDetail = ({item}) => {
+    const { addToCart } = useContext(CartCtx);
+    const onAdd=(count)=>addToCart(item,count);
 
-setProduct(searchProduct)
-steIsloading(false)
-},2000)
-
-   },[])
-   
-   
     return (
-    <div>
-        
-    
-        <header><Navbar></Navbar></header>
         <div>
-            {
-                isLoading
-                ?<p>Cargando</p>
-                :<div>
-                    <h1>{product.nombre}</h1>
-                    <p>{product.precio}</p>
-                    <p>{product.descripcion}</p>
-                    <button><Link to={'/checkout'}>Ir al chack out</Link></button>
+
+
+            <header><Navbar></Navbar></header>
+            
                 
-                </div>
-            }
-        </div>
-        
-        
+                    
+            <ItemDList children={ItemD}>
+          {
+
+            <div>
+            <p>Nombre: {item.nombre}</p>
+            <p>Categoria: {item.categoria}</p>
+            <p>Descripcion:{item.descripcion}</p>
+            <p>Precio:{item.precio}</p>
+            <ItemCount stock={item.stock} onAdd={onAdd}></ItemCount>
+            <button><Link to={'/checkout'}>Ir al check out</Link></button>
+            </div>
+            
+            // :listProducts.filter((producto) => (<ItemD id = {producto.id} nombre = {producto.nombre} descripcion = {producto.descripcion} precio = {producto.precio}></ItemD>))
+          }
+        </ItemDList>
+                            
+
+                        
+                
+            
         </div>
     )
-    
-    }
-    
-    export default ItemDetail
+
+}
+
+export default ItemDetail
