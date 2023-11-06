@@ -20,7 +20,7 @@ return (
 <Link to={'/cart'}>
 <CartWidget/>
 </Link>
-    
+
 
 </div>
 

@@ -8,13 +8,19 @@ return(
     <Link to={'/'}>Inicio</Link>
 </button>
 <button>
-    Nosotors
+<Link to={'/categories/Electrónica'}> 
+Electrónica 
+</Link>  
 </button>
 <button>
-    Categorias
+<Link to={'/categories/Hogar'}>
+    Hogar
+</Link>
 </button>
 <button>
-    Productos
+<Link to={'/categories/Ropa'}>
+    Ropa
+</Link>
 </button>
 </div>
 

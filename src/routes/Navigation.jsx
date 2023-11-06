@@ -19,6 +19,10 @@ const routes = createBrowserRouter([
         path: '/cart',
         element: <CartPage/>
     },
+    {
+        path: '/categories/:id',
+        element: <InicioPage/>
+    }
 
 
 
